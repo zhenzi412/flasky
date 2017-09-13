@@ -1,14 +1,17 @@
 from flask import Flask, render_template
 from flask_script import Manager
-from flask_bootstrap import Bootstrap 
+from flask_bootstrap import Bootstrap
+from flask_moment import Moment 
+from datetime import datetime
 
 app = Flask(__name__)
 manager = Manager(app)
 bookstrap = Bootstrap(app)
+moment = Moment(app)
 
 @app.route('/')
 def index():
-	return render_template('index.html')
+	return render_template('index.html', current_time=datetime.utcnow())
 
 
 @app.route('/user/<name>')
@@ -29,3 +32,4 @@ def internal_server_error(e):
 if __name__ == '__main__':
 	manager.run()
 
+ 
